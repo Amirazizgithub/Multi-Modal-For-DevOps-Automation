@@ -16,10 +16,6 @@ class ChatInput(BaseModel):
     message: str
 
 
-# class ChatOutput(BaseModel):
-#     results: List[Dict]
-
-
 # Health Check Endpoint
 @app.get("/health", response_model=Dict[str, str])
 async def health_check():
