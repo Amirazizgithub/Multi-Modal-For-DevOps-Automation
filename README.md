@@ -78,7 +78,7 @@ OPENAI_API_KEY=your_openai_api_key_here
 ### 4. Run the API
 
 ```sh
-uvicorn app.main:app --host 0.0.0.0 --port 8000
+uvicorn app.main:app --reload
 ```
 
 ## Usage
