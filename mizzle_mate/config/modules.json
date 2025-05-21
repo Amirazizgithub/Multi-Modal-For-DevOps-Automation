@@ -1,0 +1,7 @@
+{
+    "instance_creation": "instance_creation_model",
+    "storage": "storage_model",
+    "logs": "logs_model",
+    "monitoring": "monitoring_model",
+    "ci_cd": "ci_cd_model"
+}

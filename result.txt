@@ -1,0 +1,323 @@
+INPUT:
+------
+{
+"user_id": "dev100",
+"message": "Create a new CI/CD pipeline for frontend"
+}
+
+OUTPUT:
+-------
+[
+    {
+        "reply": "CI/CD pipeline 'frontend' created successfully!",
+        "module": "ci_cd",
+        "status": "success"
+    }
+]
+
+INPUT:
+------
+{
+"user_id": "dev100",
+"message": "Create CI/CD pipeline for backend"
+}
+
+OUTPUT:
+-------
+[
+    {
+        "reply": "CI/CD pipeline 'backend' created successfully!",
+        "module": "ci_cd",
+        "status": "success"
+    }
+]
+
+INPUT:
+------
+{
+"user_id": "dev100",
+"message": "Restart the CI/CD pipeline again"
+}
+
+OUTPUT:
+-------
+[
+    {
+        "reply": "CI/CD pipeline restarted.",
+        "module": "ci_cd",
+        "status": "success"
+    }
+]
+
+INPUT:
+------
+{
+"user_id": "dev200",
+"message": "Launch an instance with 10GB RAM and 4 CPUs"
+}
+
+OUTPUT:
+-------
+[
+    {
+        "reply": "Instance launched with 10GB RAM and 4 CPUs.",
+        "module": "instance_creation",
+        "status": "success"
+    }
+]
+
+INPUT:
+------
+{
+"user_id": "dev200",
+"message": "Create AWS EC2 instance for frontend repo"
+}
+
+OUTPUT:
+-------
+[
+    {
+        "reply": "Instance launched successfully with default specifications.",
+        "module": "instance_creation",
+        "status": "success"
+    }
+]
+
+INPUT:
+------
+{
+"user_id": "dev300",
+"message": "How's the CPU usage today?"
+}
+
+OUTPUT:
+-------
+[
+    {
+        "reply": "Current CPU usage is 31.13%. Status: normal.",
+        "module": "monitoring",
+        "status": "success"
+    }
+]
+
+INPUT:
+------
+{
+"user_id": "dev300",
+"message": "How's the network usage today?"
+}
+
+OUTPUT:
+-------
+[
+    {
+        "reply": "Current network traffic/usage is 455.4 Mbps.",
+        "module": "monitoring",
+        "status": "success"
+    }
+]
+
+INPUT:
+------
+{
+"user_id": "dev300",
+"message": "How's the ram usage today?"
+}
+
+OUTPUT:
+-------
+[
+    {
+        "reply": "Current memory/ram usage is 28.47%. Status: normal.",
+        "module": "monitoring",
+        "status": "success"
+    }
+]
+
+INPUT:
+------
+{
+"user_id": "dev400",
+"message": "Add 100GB to my current volume"
+}
+
+OUTPUT:
+-------
+[
+    {
+        "reply": "Successfully added 100GB to current volume.",
+        "module": "storage",
+        "status": "success"
+    }
+]
+
+INPUT:
+------
+{
+"user_id": "dev400",
+"message": "Expand the volume by 20GB"
+}
+
+OUTPUT:
+-------
+[
+    {
+        "reply": "Storage expansion initiated. Successfully added 20GB to current volume.",
+        "module": "storage",
+        "status": "success"
+    }
+]
+
+INPUT:
+------
+{
+"user_id": "dev500",
+"message": "Show me server logs from yesterday"
+}
+
+OUTPUT:
+-------
+[
+    {
+        "reply": "Here are the server logs for yesterday: [INFO] 2025-05-21 04:03:13: Server rebooted. [ERROR] 2025-05-21 04:03:13: Database connection failed.",
+        "module": "logs",
+        "status": "success"
+    }
+]
+
+INPUT:
+------
+{
+"user_id": "dev500",
+"message": "Get server logs of past week"
+}
+
+OUTPUT:
+-------
+[
+    {
+        "reply": "Here are the server logs for last week: [WARNING] 2025-05-21: High CPU usage detected. [INFO] 2025-05-15: Security patch applied.",
+        "module": "logs",
+        "status": "success"
+    }
+]
+
+INPUT:
+------
+{
+"user_id": "dev100",
+"message": "Create a new instance and show me current CPU usage"
+}
+
+OUTPUT:
+-------
+[
+    {
+        "reply": "Instance launched successfully with default specifications.",
+        "module": "instance_creation",
+        "status": "success"
+    },
+    {
+        "reply": "Current CPU usage is 24.57%. Status: normal.",
+        "module": "monitoring",
+        "status": "success"
+    }
+]
+
+INPUT:
+------
+{
+"user_id": "dev100",
+"message": "Create a new instance, Restart CI/CD pipeline and show me current CPU usage"
+}
+
+OUTPUT:
+-------
+[
+    {
+        "reply": "Instance launched successfully with default specifications.",
+        "module": "instance_creation",
+        "status": "success"
+    },
+    {
+        "reply": "CI/CD pipeline restarted.",
+        "module": "ci_cd",
+        "status": "success"
+    },
+    {
+        "reply": "Current CPU usage is 72.99%. Status: normal.",
+        "module": "monitoring",
+        "status": "success"
+    }
+]
+
+
+
+# app/core/intent_classifier.py
+import os
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+class IntentClassifier:
+    def __init__(self):
+        # Initialize your LLM client
+        self.llm_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+        # Define your list of possible modules/intents
+        self.possible_modules = [
+            "instance_creation",
+            "storage",
+            "logs",
+            "monitoring",
+            "ci_cd",
+            "unknown",  # Include a fallback
+        ]
+
+    # This function uses an LLM to classify the intent of a message
+    def classify(self, message: str) -> str:
+        """
+        Classifies the intent using an LLM via prompt engineering.
+        """
+        prompt = (
+            "You are an intelligent assistant that classifies user requests for DevOps automation.\n"
+            "Here are the possible categories (modules) you can assign:\n"
+            "- 'instance_creation': for requests about creating or launching virtual machines or servers.\n"
+            "- 'storage': for requests about managing or adding storage volumes or disk space.\n"
+            "- 'logs': for requests about retrieving or displaying system logs.\n"
+            "- 'monitoring': for requests about checking system metrics like CPU, memory, or network usage.\n"
+            "- 'ci_cd': for requests about managing Continuous Integration or Continuous Deployment pipelines, builds, or deployments.\n"
+            "- 'unknown': if the request does not fit any of the above categories.\n\n"
+            "Please classify the following user message into ONE of these categories.\n"
+            "Return only the category name, nothing else.\n\n"
+            f'User message: "{message}"\n'
+            "Category:"
+        )
+
+        try:
+
+            response = self.llm_client.chat.completions.create(
+                model="gpt-4-0125-preview",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": prompt},
+                ],
+                max_tokens=20,
+                temperature=0,
+            )
+            predicted_category = response.choices[0].message.content.strip().lower()
+
+            # # Ensure the predicted category is one of our known modules
+            if predicted_category not in self.possible_modules:
+                return "unknown"
+
+            return predicted_category
+
+        except Exception as e:
+            print(f"Error calling LLM for intent classification: {e}")
+            return "unknown"  # Fallback in case of API error
+
+
+intent_classifier = IntentClassifier()
