@@ -46,7 +46,7 @@ mizzle_mate/
 
 ```bash
 git clone https://github.com/your-repo/MizzleMate.git
-cd MizzleMate
+cd mizzle_mate
 ```
 
 ### 2. Create and Activate a Virtual Environment & Install Dependencies

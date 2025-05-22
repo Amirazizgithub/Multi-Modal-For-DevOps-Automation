@@ -72,14 +72,14 @@ async def chat_endpoint(input_data: ChatInput):
             response = router.route_request(detected_module, user_id, processed_message)
             results.append(response)
 
-        # Log interaction
-        log_interaction(
-            user_id=user_id,
-            message=message,
-            module=response.get("module", "unknown"),
-            reply=response.get("reply", "Error processing request."),
-            status=response.get("status", "error"),
-        )
+            # Log interaction
+            log_interaction(
+                user_id=user_id,
+                message=message,
+                module=response.get("module", "unknown"),
+                reply=response.get("reply", "Error processing request."),
+                status=response.get("status", "error"),
+            )
 
         return results
 
