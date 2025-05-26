@@ -4,6 +4,10 @@ from app.core import router
 from app.core import intent_classifier
 from app.main import app
 
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'mizzle_mate')))
+
 client = TestClient(app)
 
 class TestMizzleMateAPI:
