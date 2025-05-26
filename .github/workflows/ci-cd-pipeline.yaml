@@ -46,6 +46,7 @@ jobs:
       - name: Run Tests
         env:
           PYTHONPATH: .
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: pytest -v mizzle_mate/tests/test_api.py
 
   Continuous-Integration:
