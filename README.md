@@ -100,6 +100,55 @@ docker build -t mizzle-mate .
 docker run -p 8000:8000 mizzle-mate
 ```
 
+## Deploying to AWS ECS
+
+You can deploy Mizzle Mate as a Docker container on AWS ECS (Elastic Container Service) for scalable, production-grade hosting.
+
+### 1. Build and Push Docker Image to Amazon ECR
+
+- Authenticate Docker to your ECR registry:
+  ```sh
+  aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <your-account-id>.dkr.ecr.<your-region>.amazonaws.com
+  ```
+
+- Build your Docker image:
+  ```sh
+  docker build -t mizzle-mate .
+  ```
+
+- Tag the image for ECR:
+  ```sh
+  docker tag mizzle-mate:latest <your-account-id>.dkr.ecr.<your-region>.amazonaws.com/mizzle-mate:latest
+  ```
+
+- Push the image to ECR:
+  ```sh
+  docker push <your-account-id>.dkr.ecr.<your-region>.amazonaws.com/mizzle-mate:latest
+  ```
+
+### 2. Create an ECS Cluster and Task Definition
+
+- In the AWS ECS console, create a new cluster (e.g., "MizzleMateCluster").
+- Define a new Task Definition using the pushed ECR image.
+- Set environment variables (like `OPENAI_API_KEY`) in the task definition. (I have uploaded a .env file to an AWS S3 bucket and fetched environment variables from this bucket.)
+
+### 3. Run the Service
+
+- Launch a service in your ECS cluster using the task definition.
+- Expose port 8000 (or your chosen port) via a load balancer or security group.
+
+### 4. Access the API
+
+- Once the service is running, access your API using the load balancer DNS or public IP:
+  ```
+  http://<your-load-balancer-or-ec2-public-ip>:8000
+  ```
+
+**Tip:**  
+You can automate this workflow using the provided GitHub Actions CI/CD pipeline, which can build and push your Docker image to ECR and trigger ECS deployments on code changes.
+
+---
+
 ## API Endpoints
 
 - `GET /health` – Health check for the service.
@@ -130,4 +179,6 @@ curl -X POST "http://localhost:8000/chat" \
 
 ---
 
-MIT License © 2025 Amir Aziz
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
