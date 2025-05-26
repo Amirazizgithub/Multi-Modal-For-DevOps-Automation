@@ -8,6 +8,7 @@ folders = {
         "app/core",
         "app/utils",
         "config",
+        "tests",
     ]
 }
 
