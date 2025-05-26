@@ -45,7 +45,7 @@ jobs:
 
       - name: Download NLTK stopwords
         run: |
-          python -m nltk.downloader stopwords punkt wordnet
+          python -m nltk.downloader stopwords punkt wordnet punkt_tab
 
       - name: Run Tests
         env:
