@@ -55,7 +55,6 @@
 
 ```bash
 git clone https://github.com/Amirazizgithub/Multi-Modal-For-DevOps-Automation.git
-cd mizzle_mate
 ```
 
 ### 2. Create and Activate a Virtual Environment & Install Dependencies
@@ -87,7 +86,7 @@ OPENAI_API_KEY=your_openai_api_key_here
 ### 4. Run the API
 
 ```sh
-uvicorn app.main:app --reload
+uvicorn app:app --reload
 ```
 
 ## Usage

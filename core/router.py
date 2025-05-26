@@ -27,7 +27,7 @@ class ModuleRouter:
                     raise ImportError(f"Module configuration missing for {module_name}")
 
                 # Dynamically import the module
-                module = importlib.import_module(f"app.models.{module_file_name}")
+                module = importlib.import_module(f"models.{module_file_name}")
 
                 # Assuming the instance is named after the module (e.g., ci_cd_model_instance)
                 self.loaded_modules[module_name] = getattr(
