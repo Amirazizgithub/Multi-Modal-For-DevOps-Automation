@@ -6,9 +6,19 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
-# Add local nltk_data path
-local_nltk_path = os.path.join(os.path.dirname(__file__), "nltk_data")
-nltk.data.path.append(local_nltk_path)
+# Ensure required NLTK data is available (safe for CI/CD)
+try:
+    stopwords.words("english")
+except LookupError:
+    nltk.download("stopwords")
+try:
+    nltk.data.find("tokenizers/punkt")
+except LookupError:
+    nltk.download("punkt")
+try:
+    nltk.data.find("corpora/wordnet")
+except LookupError:
+    nltk.download("wordnet")
 
 
 class MessagePreprocessor:
