@@ -13,6 +13,7 @@ folders = {
 
 files = [
     "app/main.py",
+    "app/__init__.py",
     "app/models/__init__.py",
     "app/models/ci_cd_model.py",
     "app/models/instance_creation_model.py",

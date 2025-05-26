@@ -18,6 +18,7 @@
 mizzle_mate/
 ├── app/
 │   ├── main.py                # FastAPI application
+│   ├── __init__.py
 │   ├── models/                # Simulated models/modules
 │   │   ├── __init__.py
 │   │   ├── ci_cd_model.py
@@ -45,7 +46,7 @@ mizzle_mate/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-repo/MizzleMate.git
+git clone https://github.com/Amirazizgithub/Multi-Modal-For-DevOps-Automation.git
 cd mizzle_mate
 ```
 
