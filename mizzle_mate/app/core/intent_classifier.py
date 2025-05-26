@@ -68,8 +68,6 @@ class IntentClassifier:
             for cat in predicted_categories_list:
                 if cat in self.possible_modules:
                     valid_categories.append(cat)
-                else:
-                    print(f"LLM returned an invalid category: '{cat}'. Skipping.")
 
             # If no valid categories are found, return ['unknown'] as a fallback for router
             if not valid_categories:
@@ -78,7 +76,6 @@ class IntentClassifier:
             return valid_categories
 
         except Exception as e:
-            print(f"Error calling LLM for intent classification: {e}")
             return "unknown"  # Fallback in case of API error
 
 

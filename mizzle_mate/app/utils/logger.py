@@ -19,7 +19,6 @@ def log_interaction(user_id: str, message: str, module: str, reply: str, status:
     # Append to a JSON lines file for easy parsing
     with open(LOG_FILE, "a") as f:
         f.write(json.dumps(log_entry) + "\n")
-    print(f"Logged: {log_entry}")
 
 
 def get_logs():

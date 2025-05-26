@@ -36,6 +36,9 @@ mizzle_mate/
 │       └── logger.py               # Logging utility
 ├── config/
 │   └── modules.json           # Module configuration/registry
+├── tests/
+│   └── test_api.py            # Testing FastAPIs in ci/cd pipeline
+├── test_api.py                # Testing FastAPIs in ci/cd pipeline
 ├── Dockerfile                 # For Docker deployment
 ├── requirements.txt           # Python dependencies
 ├── README.md
