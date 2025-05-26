@@ -46,7 +46,7 @@ jobs:
       - name: Run Tests
         env:
           PYTHONPATH: .
-        run: pytest -v tests/test_api.py
+        run: pytest -v mizzle_mate/tests/test_api.py
 
   Continuous-Integration:
     name: Build and Push Docker Image
