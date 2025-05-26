@@ -15,33 +15,38 @@
 ## Folder Structure
 
 ```plaintext
-mizzle_mate/
-├── app/
-│   ├── main.py                # FastAPI application
-│   ├── __init__.py
-│   ├── models/                # Simulated models/modules
-│   │   ├── __init__.py
-│   │   ├── ci_cd_model.py
-│   │   ├── instance_creation_model.py
-│   │   ├── logs_model.py
-│   │   ├── monitoring_model.py
-│   │   └── storage_model.py
-│   ├── core/
-│   │   ├── __init__.py
-│   │   ├── intent_classifier.py  # Intent detection logic
-│   │   └── router.py             # Request routing logic
-│   └── utils/
-│       ├── __init__.py
-│       ├── message_preprocessor.py # NLP preprocessing
-│       └── logger.py               # Logging utility
+
+├── models/                # Simulated models/modules
+│   ├── __init__.py
+│   ├── ci_cd_model.py
+│   ├── instance_creation_model.py
+│   ├── logs_model.py
+│   ├── monitoring_model.py
+│   └── storage_model.py
+├── core/
+│   ├── __init__.py
+│   ├── intent_classifier.py  # Intent detection logic
+│   └── router.py             # Request routing logic
+│── utils/
+│   ├── __init__.py
+│   ├── message_preprocessor.py # NLP preprocessing
+│   └── logger.py               # Logging utility
 ├── config/
-│   └── modules.json           # Module configuration/registry
+│   └── modules.json           # Module configuration/registry
 ├── tests/
-│   └── test_api.py            # Testing FastAPIs in ci/cd pipeline
-├── test_api.py                # Testing FastAPIs in ci/cd pipeline
-├── Dockerfile                 # For Docker deployment
-├── requirements.txt           # Python dependencies
-├── README.md
+│   ├── __init__.py            # Makes 'tests' a Python package
+│   └── test_api.py            # Testing FastAPIs in ci/cd pipeline
+├── .github/                   # GitHub Actions workflow directory
+│   └── workflows/
+│       └── ci-cd-pipeline.yaml # CI/CD pipeline definition
+├── app.py                 # Main FastAPI application entry point
+├── __init__.py
+├── .env                       # Environment variables
+├── .gitignore                 # Files and directories to ignore in Git
+├── .dockerignore              # Files and directories to ignore in Docker builds
+├── Dockerfile                 # For Docker deployment
+├── requirements.txt           # Python dependencies
+└── README.md                  # Project README file
 ```
 
 ## Installation

@@ -2,9 +2,9 @@
 
 import pytest
 from fastapi.testclient import TestClient
-from app.main import app
-from app.core.router import router
-from app.core.intent_classifier import intent_classifier
+from app import app
+from core.router import router
+from core.intent_classifier import intent_classifier
 
 client = TestClient(app)
 

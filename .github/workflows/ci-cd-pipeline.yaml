@@ -47,7 +47,7 @@ jobs:
         env:
           PYTHONPATH: .
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: pytest -v mizzle_mate/tests/test_api.py
+        run: pytest -v tests/test_api.py
 
   Continuous-Integration:
     name: Build and Push Docker Image

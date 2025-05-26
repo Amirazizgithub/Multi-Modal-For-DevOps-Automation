@@ -1,52 +1,38 @@
-import os
+from pathlib import Path
 
-# Define the folder structure
-folders = {
-    "mizzle_mate": [
-        "app",
-        "app/models",
-        "app/core",
-        "app/utils",
-        "config",
-        "tests",
-    ]
-}
-
-files = [
-    "app/main.py",
-    "app/__init__.py",
-    "app/models/__init__.py",
-    "app/models/ci_cd_model.py",
-    "app/models/instance_creation_model.py",
-    "app/models/logs_model.py",
-    "app/models/monitoring_model.py",
-    "app/models/storage_model.py",
-    "app/core/__init__.py",
-    "app/core/intent_classifier.py",
-    "app/core/router.py",
-    "app/utils/__init__.py",
-    "app/utils/logger.py",
+list_of_files = [
+    "app.py",
+    "__init__.py",
+    "models/__init__.py",
+    "models/ci_cd_model.py",
+    "models/instance_creation_model.py",
+    "models/logs_model.py",
+    "models/monitoring_model.py",
+    "models/storage_model.py",
+    "core/__init__.py",
+    "core/intent_classifier.py",
+    "core/router.py",
+    "utils/__init__.py",
+    "utils/logger.py",
+    "utils/message_preprocessor.py",
     "config/modules.json",
+    "tests/__init__.py",
+    "tests/test_api.py",
+    "README.md",
+    ".gitignore",
+    ".env",
     "Dockerfile",
+    ".dockerignore",
     "requirements.txt",
+    ".github/workflows/ci-cd-pipeline.yaml",
 ]
 
 
-# Function to create folders and files
-def create_structure():
-    for root, subdirs in folders.items():
-        for subdir in subdirs:
-            os.makedirs(os.path.join(root, subdir), exist_ok=True)
-
-    for file_path in files:
-        full_path = os.path.join("mizzle_mate", file_path)
-        os.makedirs(os.path.dirname(full_path), exist_ok=True)
-        with open(full_path, "w") as f:
-            f.write("")  # Create empty file
-
-    print("Project structure created successfully!")
-
-
-# Execute folder creation
-if __name__ == "__main__":
-    create_structure()
+# Create the directories of the folder and write the files if they do not exist
+for file in list_of_files:
+    file_path = Path(file)
+    if not file_path.exists():
+        file_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(file, "w") as f:
+            f.write("# Path: " + file)
+print("Project structure created successfully!")

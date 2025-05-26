@@ -2,10 +2,10 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List, Dict
 
-from app.core.intent_classifier import intent_classifier
-from app.core.router import router
-from app.utils.logger import log_interaction, get_logs
-from app.utils.message_preprocessor import message_preprocessor
+from core.intent_classifier import intent_classifier
+from core.router import router
+from utils.logger import log_interaction, get_logs
+from utils.message_preprocessor import message_preprocessor
 
 app = FastAPI(title="Mizzle Mate DevOps Chatbot")
 
