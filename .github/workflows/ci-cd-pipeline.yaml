@@ -43,10 +43,16 @@ jobs:
         run: |
           pip install --no-cache-dir -r requirements.txt
 
+      - name: Download NLTK resources
+        run: |
+          python -m nltk.downloader -d /user/local/share/nltk_data stopwords punkt wordnet
+          echo "NLTK_DATA=/user/local/share/nltk_data" >> $GITHUB_ENV
+
       - name: Run Tests
         env:
           PYTHONPATH: .
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          NLTK_DATA: /user/local/share/nltk_data
         run: pytest -v tests/test_api.py
 
   Continuous-Integration:

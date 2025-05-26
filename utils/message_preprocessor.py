@@ -1,10 +1,15 @@
+import os
 import nltk
+import string
 
-nltk.download("punkt_tab")
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
-import string
+
+# Ensure NLTK uses a custom data directory if set (e.g., in Docker/CI)
+nltk_data_path = os.environ.get("NLTK_DATA")
+if nltk_data_path:
+    nltk.data.path.append(nltk_data_path)
 
 
 class MessagePreprocessor:
@@ -13,19 +18,28 @@ class MessagePreprocessor:
         self.stop_words = set(stopwords.words("english"))
 
     def preprocess(self, text: str) -> str:
-        # 1. Lowercasing and Tokenization
+        """
+        Preprocess a given message:
+        1. Lowercase and tokenize
+        2. Remove punctuation
+        3. Remove stopwords
+        4. Lemmatize
+        Returns a cleaned string.
+        """
+        # Lowercasing and tokenization
         tokens = word_tokenize(text.lower())
 
+        # Remove punctuation
         tokens = [
             token.translate(str.maketrans("", "", string.punctuation))
             for token in tokens
         ]
-        # Remove empty strings that might result from punctuation removal
-        tokens = [token for token in tokens if token]
+        tokens = [token for token in tokens if token]  # Remove empty tokens
 
-        # 3. Stopword Removal
+        # Remove stopwords
         filtered_tokens = [word for word in tokens if word not in self.stop_words]
 
+        # Lemmatize remaining tokens
         lemmatized_tokens = [
             self.lemmatizer.lemmatize(word) for word in filtered_tokens
         ]
@@ -33,4 +47,5 @@ class MessagePreprocessor:
         return " ".join(lemmatized_tokens)
 
 
+# Singleton instance for reuse
 message_preprocessor = MessagePreprocessor()
