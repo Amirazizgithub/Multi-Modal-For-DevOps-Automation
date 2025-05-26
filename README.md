@@ -39,6 +39,12 @@
 ├── .github/                   # GitHub Actions workflow directory
 │   └── workflows/
 │       └── ci-cd-pipeline.yaml # CI/CD pipeline definition
+├── nltk_data/
+|   ├── corpora/
+│   |   ├── stopwords
+|   └── wordnet
+|   └── tokenizers/
+|       └── punkt
 ├── app.py                 # Main FastAPI application entry point
 ├── __init__.py
 ├── .env                       # Environment variables

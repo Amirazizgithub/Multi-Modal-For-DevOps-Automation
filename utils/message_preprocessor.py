@@ -6,10 +6,9 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
-# Ensure NLTK uses a custom data directory if set (e.g., in Docker/CI)
-nltk_data_path = os.environ.get("NLTK_DATA")
-if nltk_data_path:
-    nltk.data.path.append(nltk_data_path)
+# Add local nltk_data path
+local_nltk_path = os.path.join(os.path.dirname(__file__), "nltk_data")
+nltk.data.path.append(local_nltk_path)
 
 
 class MessagePreprocessor:
