@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-south-1:622539661644:task-definition/mizzle-mate-app-task:1",
+    "taskDefinitionArn": "arn:aws:ecs:ap-south-1:622539661644:task-definition/mizzle-mate-app-task:3",
     "containerDefinitions": [
         {
             "name": "mizzle-mate-app",
@@ -44,7 +44,7 @@
     "taskRoleArn": "arn:aws:iam::622539661644:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::622539661644:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 1,
+    "revision": 3,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -91,12 +91,12 @@
         "FARGATE"
     ],
     "cpu": "1024",
-    "memory": "2048",
+    "memory": "3072",
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2025-05-26T10:33:24.396Z",
+    "registeredAt": "2025-05-26T15:50:08.836Z",
     "registeredBy": "arn:aws:iam::622539661644:root",
     "tags": []
 }
