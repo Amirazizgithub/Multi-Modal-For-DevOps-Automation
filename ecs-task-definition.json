@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-south-1:622539661644:task-definition/mizzle-mate-app-task:3",
+    "taskDefinitionArn": "arn:aws:ecs:ap-south-1:622539661644:task-definition/mizzle-mate-app-task:5",
     "containerDefinitions": [
         {
             "name": "mizzle-mate-app",
@@ -7,11 +7,17 @@
             "cpu": 0,
             "portMappings": [
                 {
-                    "name": "mizzle-mate-app-80-tcp",
+                    "name": "80",
                     "containerPort": 80,
                     "hostPort": 80,
                     "protocol": "tcp",
                     "appProtocol": "http"
+                },
+                {
+                    "name": "8000",
+                    "containerPort": 8000,
+                    "hostPort": 8000,
+                    "protocol": "tcp"
                 }
             ],
             "essential": true,
@@ -44,7 +50,7 @@
     "taskRoleArn": "arn:aws:iam::622539661644:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::622539661644:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 3,
+    "revision": 5,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -96,7 +102,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2025-05-26T15:50:08.836Z",
+    "registeredAt": "2025-05-26T16:36:55.490Z",
     "registeredBy": "arn:aws:iam::622539661644:root",
     "tags": []
 }
